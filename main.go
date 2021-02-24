@@ -16,7 +16,7 @@ func main() {
 
 	sm := http.NewServeMux()
 	sm.Handle("/", hh)
-	sm.Handler("/bye", gh)
+	sm.Handle("/bye", gh)
 
 	err := http.ListenAndServe(":8080", sm)
 	if err != nil {
