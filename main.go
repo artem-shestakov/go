@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -15,5 +16,9 @@ func main() {
 	sm := http.NewServeMux()
 	sm.Handle("/", hh)
 
-	http.ListenAndServe(":9090", sm)
+	err := http.ListenAndServe(":8080", sm)
+	if err != nil {
+		fmt.Println(err)
+	}
+
 }
