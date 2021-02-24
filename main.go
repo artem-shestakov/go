@@ -8,7 +8,7 @@ import (
 
 func main() {
 	l := log.New(os.Stdout, "product-api", log.LstdFlags)
-	hh := NewHello(l)
+	hh := handlers.NewHello(l)
 
 	sm := http.NewServeMux()
 	sm.Handle("/", hh)
