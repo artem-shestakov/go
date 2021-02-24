@@ -1,4 +1,4 @@
-package handlers
+package main
 
 import (
 	"fmt"
@@ -15,7 +15,7 @@ func NewHello(l *log.Logger) *Hello {
 	return &Hello{l}
 }
 
-func (h *Hello) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (Hello) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	h.l.Println("Hello world")
 	d, err := ioutil.ReadAll(r.Body)
 	if err != nil {
