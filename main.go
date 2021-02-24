@@ -4,6 +4,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/artem-shestakov/go/handlers"
 )
 
 func main() {
