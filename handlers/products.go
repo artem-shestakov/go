@@ -1,3 +1,17 @@
+// Package classification Product API.
+//
+// Documentation for Product API
+//
+//     Schemes: http
+//	   BasePath: /
+//	   Version: 1.0.0
+//
+//	   Consumes:
+//	   - application/json
+//
+//     Produces:
+//	   - application/json
+// swagger:meta
 package handlers
 
 import (
@@ -12,6 +26,26 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// A list of products
+// swagger:response productsResponse
+type productsResponseWrapper struct {
+	// All products in the system
+	// in: body
+	Body []data.Product
+}
+
+// swagger:response noContent
+type productNoContent struct {
+}
+
+// swagger:parameters updateProduct
+type productIDParameterWrapper struct {
+	// The ID of the product to update from database
+	// in: path
+	//required: true
+	ID int `json:"id"`
+}
+
 type Products struct {
 	l *log.Logger
 }
@@ -19,6 +53,11 @@ type Products struct {
 func NewProducts(l *log.Logger) *Products {
 	return &Products{l}
 }
+
+// swagger:route GET / products listProducts
+// Returns a list of products
+// responses:
+//	200: productsResponse
 
 func (p *Products) GetProducts(w http.ResponseWriter, r *http.Request) {
 	lp := data.GetProducts()
@@ -37,6 +76,12 @@ func (p *Products) AddProduct(w http.ResponseWriter, r *http.Request) {
 	data.AddProduct(&prod)
 }
 
+// swagger:route PUT /{id} products updateProduct
+// Returns a list of products
+// responses:
+//	201: noContent
+
+// UpdateProducts updates product in database
 func (p *Products) UpdateProducts(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(mux.Vars(r)["id"])
 	if err != nil {
